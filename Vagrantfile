@@ -12,6 +12,6 @@ Vagrant.configure("2") do |config|
       vb.linked_clone = false
     end
 
-    wp.vm.provision "shell", path: "wordpress.sh"
+    wp.vm.provision "shell", path: "setup_wordpress.sh"
   end
 end

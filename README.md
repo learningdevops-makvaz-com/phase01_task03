@@ -2,7 +2,7 @@
 
 This repo for [Task 03](https://learningdevops.makvaz.com/phase1-task3-scripting).
 
-You need to update file `wordpress.sh`
+You need to update file `setup_wordpress.sh`
 
 To start(create) vm type `vagrant up`
 
