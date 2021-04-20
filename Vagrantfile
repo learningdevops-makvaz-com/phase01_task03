@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 Vagrant.configure("2") do |config|
   config.vm.define 'wordpress' do |wp|
     wp.vm.box = "generic/ubuntu2004"
