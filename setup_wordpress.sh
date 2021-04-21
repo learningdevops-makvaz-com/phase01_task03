@@ -22,13 +22,10 @@ mysql --user=root --password=root_password < /vagrant/script.sql
 sudo apt install php-cli php-fpm php-mysql php-json php-opcache php-mbstring php-xml php-gd php-curl -y
 
 #Installing Wordpress
-cd /var/www/html
-wget ${wp_url}
-sudo tar -xzvf latest.tar.gz
-rm latest.tar.gz
-cd wordpress
-cp /vagrant/wp-config.php .
-cd ~
+wget ${wp_url} -P /var/www/html
+sudo tar -xzvf /var/www/html/latest.tar.gz -C /var/www/html
+rm /var/www/html/latest.tar.gz
+cp /vagrant/wp-config.php /var/www/html/wordpress 
 
 #Copy Nginx/Wordpress Settings
 \cp /vagrant/default /etc/nginx/sites-enabled/
