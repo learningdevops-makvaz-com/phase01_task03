@@ -22,4 +22,6 @@ mysql --user=root --password=root_password < /vagrant/script.sql
 cd /var/www/html
 wget ${wp_url}
 sudo tar -xzvf latest.tar.gz
-cat /vagrant/script.sql
+rm latest.tar.gz
+cd wordpress
+cp /vagrant/wp-config.php .
