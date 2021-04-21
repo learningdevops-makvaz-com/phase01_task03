@@ -1,6 +1,7 @@
 #!/bin/bash
 
 wp_url=https://wordpress.org/latest.tar.gz
+wp_cli_url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 #Updating Repositories
 sudo apt update
@@ -32,3 +33,13 @@ cp /vagrant/wp-config.php /var/www/html/wordpress
 
 #Refresh nginx
 sudo systemctl restart nginx
+
+#Initializing WP
+wget ${wp_cli_url} 
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+cd /var/www/html/wordpress
+wp core install --url=localhost --title="Blogging Platform" --admin_user=admin --admin_email=danpal@example.com --admin_password="!2three456." --allow-root 
+
+#Installing Theme
+wp theme install twentynineteen --activate --allow-root
