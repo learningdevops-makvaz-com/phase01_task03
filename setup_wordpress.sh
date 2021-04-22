@@ -31,6 +31,6 @@ wget ${wp_cli_url}
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 cd /var/www/html/wordpress
-wp core install --url=localhost --title="Blogging Platform" --admin_user=admin --admin_email=danpal@example.com --admin_password="!2three456." --allow-root 
+wp core install --url="192.168.50.2" --title="Blogging Platform" --admin_user=admin --admin_email=danpal@example.com --admin_password="!2three456." --allow-root 
 
 wp theme install twentynineteen --activate --allow-root
