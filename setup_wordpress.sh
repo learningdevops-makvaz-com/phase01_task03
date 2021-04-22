@@ -6,22 +6,19 @@ wp_cli_url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.
 
 sudo apt update
 
-sudo apt install nginx -y
+sudo apt install php-cli php-fpm php-mysql php-json php-opcache php-mbstring php-xml php-gd php-curl nginx mysql-server -y
+
 sudo ufw allow 'Nginx Full'
 
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root_password'
 
 sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root_password'
 
-sudo apt-get -y install mysql-server
-
 mysql --user=root --password=root_password < /vagrant/script.sql
-
-sudo apt install php-cli php-fpm php-mysql php-json php-opcache php-mbstring php-xml php-gd php-curl -y
 
 wget ${wp_url} -P /var/www/html
 sudo tar -xzvf /var/www/html/latest.tar.gz -C /var/www/html
-rm /var/www/html/latest.tar.gz
+rm -f /var/www/html/latest.tar.gz
 cp /vagrant/wp-config.php /var/www/html/wordpress 
 
 \cp /vagrant/default /etc/nginx/sites-enabled/
