@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 wp_url=https://wordpress.org/latest.tar.gz
 wp_cli_url=https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
