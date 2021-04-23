@@ -34,3 +34,4 @@ wp core install --url="192.168.50.2" --title="Blogging Platform" --admin_user=ad
 wp theme install twentynineteen --activate --allow-root
 
 sudo chown -R www-data: /var/www/html/wordpress
+
