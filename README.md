@@ -10,5 +10,6 @@ A simple script to setup WordPress on Ubuntu.
 ```
 sh setup_wordpress.sh
 ```
-### Hint
+### Hints
 * You can change the provided IP address with the IP address of your own machine while registering the WordPress user.  
+* No need for Vagrant
