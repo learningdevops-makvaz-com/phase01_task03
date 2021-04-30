@@ -85,7 +85,10 @@ echo "------------------ Configuring WordPress ------------------"
 cp /vagrant/wp-config.php /var/www/wordpress/wp-config.php
 
 echo "------------------ Installing WordPress CLI ------------------"
-curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+WP_CLI=wp-cli.phar
+if [[ ! -f "$WP_CLI" ]]; then
+    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+fi
 php wp-cli.phar --info
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
