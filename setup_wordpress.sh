@@ -49,7 +49,6 @@ sudo systemctl restart php7.4-fpm
 
 echo "------------------ Configuring Nginx ------------------"
 sudo mkdir /var/www/wordpress
-sudo chown -R $USER:$USER /var/www/wordpress
 
 echo "------------------ Nginx Configuration ------------------"
 cp /vagrant/nginx_conf /etc/nginx/sites-available/wordpress
