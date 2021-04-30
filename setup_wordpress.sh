@@ -69,7 +69,10 @@ sudo systemctl restart nginx
 
 echo "------------------ Downloading WordPress ------------------"
 cd /tmp
-curl -LO https://wordpress.org/latest.tar.gz
+FILE=latest.tar.gz
+if [[ ! -f "$FILE" ]]; then
+    curl -LO https://wordpress.org/latest.tar.gz
+fi
 
 echo "------------------ Extracting WordPress ------------------"
 tar xzvf latest.tar.gz
