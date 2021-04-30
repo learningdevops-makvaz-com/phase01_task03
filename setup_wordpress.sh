@@ -117,7 +117,7 @@ echo "------------------ Setting Up Privileges ------------------"
 sudo chown -R www-data:www-data /var/www/wordpress
 
 echo "------------------ Configuring WordPress ------------------"
-sudo cp /home/$USER/wp-config.php /var/www/wordpress/wp-config.php
+cp /vagrant/wp-config.php /var/www/wordpress/wp-config.php
 
 echo "------------------ Installing WordPress CLI ------------------"
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
