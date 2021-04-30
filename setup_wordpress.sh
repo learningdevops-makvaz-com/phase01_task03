@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 echo '################## LEMP Stack Installation ####################'
 cd ~
 echo "------------------ Updating APT ------------------"
