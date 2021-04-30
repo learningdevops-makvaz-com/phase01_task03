@@ -128,7 +128,7 @@ wp cli version
 
 cd /var/www/wordpress
 echo "------------------ Creating WordPress User ------------------"
-wp core install --url="192.168.8.191" --title="WordPress Setup" --admin_user=admin --admin_email=admin@test.com --admin_password="!2three456." --allow-root
+wp core install --url="192.168.50.2" --title="WordPress Setup" --admin_user=admin --admin_email=admin@test.com --admin_password="!2three456." --allow-root
 
 echo "------------------ Activating WordPress Theme ------------------"
 wp theme install "twentynineteen" --activate --allow-root
