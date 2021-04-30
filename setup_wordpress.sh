@@ -68,9 +68,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/privat
 sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
 echo "------------------ Creating Configuration Snippet ------------------"
-sudo echo "
-ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;" | sudo tee /etc/nginx/snippets/self-signed.conf
+cp /vagrant/self-signed.conf /etc/nginx/snippets
 
 echo "------------------ Creating ssl-params.conf ------------------"
 mv /vagrant/ssl-params.conf /etc/nginx/snippets/
