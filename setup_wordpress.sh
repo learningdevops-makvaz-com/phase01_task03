@@ -51,7 +51,6 @@ server {
 
 echo "------------------ Creating Soft Link ------------------"
 sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 
 echo "------------------ Testing Nginx ------------------"
 sudo nginx -t
@@ -224,9 +223,6 @@ sudo chown -R www-data:www-data /var/www/wordpress
 
 echo "------------------ Configuring WordPress ------------------"
 sudo cp /home/$USER/wp-config.php /var/www/wordpress/wp-config.php
-
-echo "------------------ Restarting Nginx ------------------"
-sudo systemctl restart nginx
 
 echo "------------------ Installing WordPress CLI ------------------"
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
