@@ -49,6 +49,7 @@ sudo systemctl restart php7.4-fpm
 
 echo "------------------ Configuring Nginx ------------------"
 sudo mkdir /var/www/wordpress
+sudo chown -R www-data:www-data /var/www/wordpress
 
 echo "------------------ Nginx Configuration ------------------"
 cp /vagrant/nginx_conf /etc/nginx/sites-available/wordpress
@@ -100,5 +101,3 @@ wp core install --url="192.168.50.2" --title="WordPress Setup" --admin_user=admi
 
 echo "------------------ Activating WordPress Theme ------------------"
 wp theme install "twentynineteen" --activate --allow-root
-
-sudo chown -R www-data:www-data /var/www/wordpress
