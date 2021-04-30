@@ -18,6 +18,18 @@ echo "------------------ Installing MYSQL ------------------"
 sudo apt -y install mysql-server
 sudo mysql_secure_installation
 
+echo "------------------ Creating WordPress Database ------------------"
+read -p "Enter Your MYSQL Password: " mysql_password
+
+sudo mysql -u root -p$mysql_password << EOF
+CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON wordpress.* to wordpressuser@'localhost';
+FLUSH PRIVILEGES;
+EOF
+
+echo "The Default Password Set For The 'WordPress' Database is 'password'. You Can Change It Later."
+
 echo "------------------ Installing PHP ------------------"
 sudo apt -y install php-fpm php-mysql
 
@@ -30,18 +42,6 @@ cp /vagrant/self-signed.conf /etc/nginx/snippets/
 
 echo "------------------ Creating ssl-params.conf ------------------"
 cp /vagrant/ssl-params.conf /etc/nginx/snippets/
-
-echo "------------------ Creating WordPress Database ------------------"
-read -p "Enter Your MYSQL Password: " mysql_password
-
-sudo mysql -u root -p$mysql_password << EOF
-CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-CREATE USER 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON wordpress.* to wordpressuser@'localhost';
-FLUSH PRIVILEGES;
-EOF
-
-echo "The Default Password Set For The 'WordPress' Database is 'password'. You Can Change It Later."
 
 echo "------------------ Installing PHP Extentions ------------------"
 sudo apt update
