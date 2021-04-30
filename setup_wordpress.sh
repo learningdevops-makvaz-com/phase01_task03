@@ -24,12 +24,11 @@ sudo apt -y install php-fpm php-mysql
 echo "------------------ Configuring Nginx ------------------"
 sudo mkdir /var/www/wordpress
 sudo chown -R $USER:$USER /var/www/wordpress
-read -p "Enter the public IP address, please (192.168.X.X): " ip_address
 
 echo "
 server {
     listen 80;
-    server_name $ip_address;
+    server_name 192.168.50.2;
     root /var/www/wordpress;
 
     index index.html index.htm index.php;
@@ -61,7 +60,7 @@ sudo systemctl reload nginx
 echo "------------------ Creating Nginx Index ------------------"
 cp /vagrant/index.html /var/www/wordpress/index.html
 
-echo "You Can Test The Index Page At ${ip_address}"
+echo "You Can Test The Index Page At 192.168.50.2"
 
 echo "------------------ Creating SSL Certificate ------------------"
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
