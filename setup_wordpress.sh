@@ -12,7 +12,7 @@ sudo apt -y install nginx
 
 echo "------------------ Configuring Firewall ------------------"
 sudo ufw enable
-sudo ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx Full'
 
 echo "------------------ Installing MYSQL ------------------"
 sudo apt -y install mysql-server
@@ -71,10 +71,6 @@ cp /vagrant/self-signed.conf /etc/nginx/snippets/
 
 echo "------------------ Creating ssl-params.conf ------------------"
 cp /vagrant/ssl-params.conf /etc/nginx/snippets/
-
-echo "------------------ Adjusting Firewall ------------------"
-sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
 
 echo "------------------ Testing Nginx ------------------"
 sudo nginx -t
