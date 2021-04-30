@@ -138,52 +138,8 @@ sudo apt update
 sudo apt -y install php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
 sudo systemctl restart php7.4-fpm
 
-echo "------------------ Adding Location Blocks ------------------"
-echo "
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    include snippets/self-signed.conf;
-    include snippets/ssl-params.conf;
-
-
-    server_name $ip_address;
-    root /var/www/wordpress;
-
-    index index.html index.htm index.php;
-
-    location / {
-        #try_files \$uri \$uri/ =404;
-         try_files \$uri \$uri/ /index.php\$is_args$args;
-    }
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
-    }
-
-    location ~ /\.ht {
-        deny all;
-    }
-
-    location = /favicon.ico { log_not_found off; access_log off; }
-    location = /robots.txt { log_not_found off; access_log off; allow all; }
-    location ~* \.(css|gif|ico|jpeg|jpg|js|png)$ {
-        expires max;
-        log_not_found off;
-    }
-
-}
-
-server {
-    listen 80;
-    listen [::]:80;
-
-    server_name $ip_address;
-
-    return 302 https://\$server_name\$request_uri;
-
-}" | sudo tee /etc/nginx/sites-available/wordpress
+echo "------------------ Nginx Configuration ------------------"
+cp /vagrant/nginx_conf /etc/nginx/sites-available/wordpress
 
 echo "------------------ Testing Nginx ------------------"
 sudo nginx -t
