@@ -68,38 +68,10 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/privat
 sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
 echo "------------------ Creating Configuration Snippet ------------------"
-cp /vagrant/self-signed.conf /etc/nginx/snippets
+cp /vagrant/self-signed.conf /etc/nginx/snippets/
 
 echo "------------------ Creating ssl-params.conf ------------------"
-mv /vagrant/ssl-params.conf /etc/nginx/snippets/
-
-echo "------------------ Adjusting Nginx To SSL ------------------"
-sudo cp /etc/nginx/sites-available/wordpress /etc/nginx/sites-available/wordpress.bak
-
-echo "
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    include snippets/self-signed.conf;
-    include snippets/ssl-params.conf;
-
-    server_name $ip_address;
-
-    root /var/www/wordpress/html;
-    index index.html index.htm index.nginx-debian.html;
-
-}" | sudo tee /etc/nginx/sites-available/wordpress
-
-echo "
-
-server {
-    listen 80;
-    listen [::]:80;
-
-    server_name $ip_address;
-
-    return 301 https://\$server_name\$request_uri;
-}" | sudo tee /etc/nginx/sites-available/wordpress
+cp /vagrant/ssl-params.conf /etc/nginx/snippets/
 
 echo "------------------ Adjusting Firewall ------------------"
 sudo ufw allow 'Nginx Full'
