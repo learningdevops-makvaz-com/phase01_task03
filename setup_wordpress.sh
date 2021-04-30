@@ -59,15 +59,7 @@ echo "------------------ Restarting Nginx ------------------"
 sudo systemctl reload nginx
 
 echo "------------------ Creating Nginx Index ------------------"
-echo "
-<html>
-  <head>
-    <title>Rojin's Website</title>
-  </head>
-  <body>
-    <h1>Hello Rojin!</h1>
-  </body>
-</html>" | sudo tee /var/www/wordpress/index.html
+cp /vagrant/index.html /var/www/wordpress/index.html
 
 echo "You Can Test The Index Page At ${ip_address}"
 
