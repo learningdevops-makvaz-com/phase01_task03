@@ -2,17 +2,17 @@
 set -e
 echo '################## LEMP Stack Installation ####################'
 echo "------------------ Updating APT ------------------"
-sudo apt -y update && sudo apt -y upgrade
+sudo apt-get -y update && sudo apt-get -y upgrade
 
 echo "------------------ Installing Nginx ------------------"
-sudo apt -y install nginx
+sudo apt-get -y install nginx
 
 echo "------------------ Configuring Firewall ------------------"
 sudo ufw enable
 sudo ufw allow 'Nginx Full'
 
 echo "------------------ Installing MYSQL ------------------"
-sudo apt -y install mysql-server
+sudo apt-get -y install mysql-server
 
 echo "------------------ Creating WordPress Database ------------------"
 mysql_password=QpWo#2LuQ
@@ -29,9 +29,9 @@ EOF
 echo "The Default Password Set For The 'WordPress' Database is 'password'. You Can Change It Later."
 
 echo "------------------ Installing PHP ------------------"
-sudo apt -y install php-fpm php-mysql
+sudo apt-get -y install php-fpm php-mysql
 
-#echo "------------------ Configuring SSL Certificate ------------------"
+echo "------------------ Configuring SSL Certificate ------------------"
 sudo mv /vagrant/nginx-selfsigned.crt /etc/ssl/certs/
 sudo mv /vagrant/nginx-selfsigned.key /etc/ssl/private/
 sudo mv /vagrant/dhparam.pem /etc/nginx/
@@ -43,8 +43,8 @@ echo "------------------ Creating ssl-params.conf ------------------"
 cp /vagrant/ssl-params.conf /etc/nginx/snippets/
 
 echo "------------------ Installing PHP Extentions ------------------"
-sudo apt update
-sudo apt -y install php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
+sudo apt-get update
+sudo apt-get -y install php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
 sudo systemctl restart php7.4-fpm
 
 echo "------------------ Configuring Nginx ------------------"
