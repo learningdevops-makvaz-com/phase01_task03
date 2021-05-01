@@ -25,8 +25,9 @@ GRANT ALL PRIVILEGES ON wordpress.* to wordpressuser@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-echo "------------------ Installing PHP-FPM and PHP-MYSQL ------------------"
-sudo apt-get -y install php-fpm php-mysql
+echo "------------------ Installing PHP Packages ------------------"
+sudo apt-get -y install php-fpm php-mysql php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
+sudo systemctl restart php7.4-fpm
 
 echo "------------------ Configuring SSL Certificate ------------------"
 cp /vagrant/nginx-selfsigned.crt /etc/ssl/certs/
@@ -36,11 +37,6 @@ cp /vagrant/dhparam.pem /etc/nginx/
 echo "------------------ Copying SSL Configurations to Snippet ------------------"
 cp /vagrant/self-signed.conf /etc/nginx/snippets/
 cp /vagrant/ssl-params.conf /etc/nginx/snippets/
-
-echo "------------------ Installing PHP Extentions ------------------"
-sudo apt-get update
-sudo apt-get -y install php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
-sudo systemctl restart php7.4-fpm
 
 echo "------------------ Creating WordPress Nginx Directory ------------------"
 WP_DIR=/var/www/wordpress
