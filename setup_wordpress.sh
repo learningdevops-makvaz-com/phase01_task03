@@ -1,9 +1,7 @@
 #!/bin/bash
 set -e
 echo '################## LEMP Stack Installation ####################'
-cd ~
 echo "------------------ Updating APT ------------------"
-echo
 sudo apt -y update && sudo apt -y upgrade
 
 echo "------------------ Installing Nginx ------------------"
