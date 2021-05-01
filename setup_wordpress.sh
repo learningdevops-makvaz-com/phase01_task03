@@ -55,11 +55,9 @@ cp /vagrant/nginx_conf /etc/nginx/sites-available/wordpress
 
 echo "------------------ Creating Nginx Index ------------------"
 cp /vagrant/index.html /var/www/wordpress/index.html
-echo "You Can Test The Index Page At 192.168.50.2"
 
 echo "------------------ Creating Soft Link ------------------"
 sudo ln -sf /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
-
 
 echo "------------------ Testing Nginx ------------------"
 sudo nginx -t
