@@ -25,7 +25,7 @@ GRANT ALL PRIVILEGES ON wordpress.* to wordpressuser@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-echo "------------------ Installing PHP ------------------"
+echo "------------------ Installing PHP-FPM and PHP-MYSQL ------------------"
 sudo apt-get -y install php-fpm php-mysql
 
 echo "------------------ Configuring SSL Certificate ------------------"
@@ -42,16 +42,16 @@ sudo apt-get update
 sudo apt-get -y install php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
 sudo systemctl restart php7.4-fpm
 
-echo "------------------ Configuring Nginx ------------------"
+echo "------------------ Creating WordPress Nginx Directory ------------------"
 WP_DIR=/var/www/wordpress
 if [ ! -d "$WP_DIR" ]; then
     sudo mkdir /var/www/wordpress
 fi
 
-echo "------------------ Nginx Configuration ------------------"
+echo "------------------ Copying Nginx Configuration ------------------"
 cp /vagrant/nginx_conf /etc/nginx/sites-available/wordpress
 
-echo "------------------ Creating Nginx Index ------------------"
+echo "------------------ Copying Nginx Index ------------------"
 cp /vagrant/index.html /var/www/wordpress/index.html
 
 echo "------------------ Creating Soft Link ------------------"
@@ -77,7 +77,7 @@ sudo cp -a /tmp/wordpress/. /var/www/wordpress
 echo "------------------ Setting Up Privileges ------------------"
 sudo chown -R www-data:www-data /var/www/wordpress/
 
-echo "------------------ Configuring WordPress ------------------"
+echo "------------------ Copying WordPress PHP Configuration ------------------"
 cp /vagrant/wp-config.php /var/www/wordpress/wp-config.php
 
 echo "------------------ Installing WordPress CLI ------------------"
