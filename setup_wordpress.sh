@@ -67,13 +67,13 @@ sudo systemctl restart nginx
 
 echo "------------------ Downloading WordPress ------------------"
 cd /tmp
-FILE=latest.tar.gz
+FILE=wordpress-5.7.1.tar.gz
 if [[ ! -f "$FILE" ]]; then
-    curl -LO https://wordpress.org/latest.tar.gz
+    curl -LO https://wordpress.org/wordpress-5.7.1.tar.gz
 fi
 
 echo "------------------ Extracting WordPress ------------------"
-tar xzvf latest.tar.gz
+tar xzvf wordpress-5.7.1.tar.gz
 sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
 sudo cp -a /tmp/wordpress/. /var/www/wordpress
 
