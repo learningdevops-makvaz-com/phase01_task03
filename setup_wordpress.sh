@@ -33,10 +33,8 @@ cp /vagrant/nginx-selfsigned.crt /etc/ssl/certs/
 cp /vagrant/nginx-selfsigned.key /etc/ssl/private/
 cp /vagrant/dhparam.pem /etc/nginx/
 
-echo "------------------ Creating Configuration Snippet ------------------"
+echo "------------------ Copying SSL Configurations to Snippet ------------------"
 cp /vagrant/self-signed.conf /etc/nginx/snippets/
-
-echo "------------------ Creating ssl-params.conf ------------------"
 cp /vagrant/ssl-params.conf /etc/nginx/snippets/
 
 echo "------------------ Installing PHP Extentions ------------------"
