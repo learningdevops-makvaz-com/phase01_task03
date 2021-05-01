@@ -25,8 +25,6 @@ GRANT ALL PRIVILEGES ON wordpress.* to wordpressuser@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-echo "The Default Password Set For The 'WordPress' Database is 'password'. You Can Change It Later."
-
 echo "------------------ Installing PHP ------------------"
 sudo apt-get -y install php-fpm php-mysql
 
@@ -51,7 +49,6 @@ WP_DIR=/var/www/wordpress
 if [ ! -d "$WP_DIR" ]; then
     sudo mkdir /var/www/wordpress
 fi
-#sudo chown -R www-data:www-data /var/www/wordpress/
 
 echo "------------------ Nginx Configuration ------------------"
 cp /vagrant/nginx_conf /etc/nginx/sites-available/wordpress
