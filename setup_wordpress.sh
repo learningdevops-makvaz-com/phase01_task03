@@ -13,10 +13,11 @@ sudo ufw allow 'Nginx Full'
 
 echo "------------------ Installing MYSQL ------------------"
 sudo apt -y install mysql-server
-sudo mysql_secure_installation
 
 echo "------------------ Creating WordPress Database ------------------"
-read -p "Enter Your MYSQL Password: " mysql_password
+mysql_password=QpWo#2LuQ$y
+debconf-set-selections <<< "mysql-server mysql-server/root_password password $mysql_password"
+debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $mysql_password"
 
 sudo mysql -u root -p$mysql_password << EOF
 CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
