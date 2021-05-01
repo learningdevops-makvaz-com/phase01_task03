@@ -8,7 +8,6 @@ echo "------------------ Installing Nginx ------------------"
 sudo apt-get -y install nginx
 
 echo "------------------ Configuring Firewall ------------------"
-sudo ufw enable
 sudo ufw allow 'Nginx Full'
 
 echo "------------------ Installing MYSQL ------------------"
