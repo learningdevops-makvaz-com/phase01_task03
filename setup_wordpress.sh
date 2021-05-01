@@ -74,7 +74,6 @@ fi
 
 echo "------------------ Extracting WordPress ------------------"
 tar xzvf wordpress-5.7.1.tar.gz
-sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
 sudo cp -a /tmp/wordpress/. /var/www/wordpress
 
 echo "------------------ Setting Up Privileges ------------------"
