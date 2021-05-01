@@ -15,7 +15,7 @@ echo "------------------ Installing MYSQL ------------------"
 sudo apt -y install mysql-server
 
 echo "------------------ Creating WordPress Database ------------------"
-mysql_password=QpWo#2LuQ$y
+mysql_password=QpWo#2LuQ
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $mysql_password"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $mysql_password"
 
@@ -31,9 +31,10 @@ echo "The Default Password Set For The 'WordPress' Database is 'password'. You C
 echo "------------------ Installing PHP ------------------"
 sudo apt -y install php-fpm php-mysql
 
-echo "------------------ Creating SSL Certificate ------------------"
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
-sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
+#echo "------------------ Configuring SSL Certificate ------------------"
+sudo mv /vagrant/nginx-selfsigned.crt /etc/ssl/certs/
+sudo mv /vagrant/nginx-selfsigned.key /etc/ssl/private/
+sudo mv /vagrant/dhparam.pem /etc/nginx/
 
 echo "------------------ Creating Configuration Snippet ------------------"
 cp /vagrant/self-signed.conf /etc/nginx/snippets/
