@@ -18,12 +18,7 @@ mysql_password='QpWo#2LuQ'
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $mysql_password"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $mysql_password"
 
-sudo mysql -u root -p$mysql_password << EOF
-CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-CREATE USER IF NOT EXISTS 'wordpressuser'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON wordpress.* to wordpressuser@'localhost';
-FLUSH PRIVILEGES;
-EOF
+sudo mysql -u root -p$mysql_password < /vagrant/wordpress_db.sql
 
 echo "------------------ Installing PHP Packages ------------------"
 sudo apt-get -y install php-fpm php-mysql php-curl php-gd php-intl php-mbstring php-soap php-xml php-xmlrpc php-zip
