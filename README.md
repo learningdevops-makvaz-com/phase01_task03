@@ -19,5 +19,3 @@ To destroy vm type `vagrant destroy -f`
 ```
 sh setup_wordpress.sh
 ```
-### Hints
-* You can change the provided IP address with the IP address of your own machine while registering the WordPress user.  
