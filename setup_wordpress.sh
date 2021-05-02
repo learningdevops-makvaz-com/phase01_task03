@@ -30,9 +30,10 @@ sudo apt-get -y install php-fpm php-mysql php-curl php-gd php-intl php-mbstring 
 sudo systemctl restart php7.4-fpm
 
 echo "------------------ Configuring SSL Certificate ------------------"
-cp /vagrant/nginx-selfsigned.crt /etc/ssl/certs/
-cp /vagrant/nginx-selfsigned.key /etc/ssl/private/
-cp /vagrant/dhparam.pem /etc/nginx/
+sudo openssl req -x509 -newkey rsa:2048 -days 365 -nodes \
+    -subj "/C=IR/ST=Tehran/L=Tehran/O=WordPress/OU=WP/CN=192.168.50.2" \
+    -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
 echo "------------------ Copying SSL Configurations to Snippet ------------------"
 cp /vagrant/self-signed.conf /etc/nginx/snippets/
