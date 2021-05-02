@@ -39,6 +39,6 @@ server {
 
     server_name 192.168.50.2;
 
-    return 302 https://$server_name$request_uri;
+    return 301 https://$server_name$request_uri;
 
 }
