@@ -14,7 +14,7 @@ echo "------------------ Installing MYSQL ------------------"
 sudo apt-get -y install mysql-server
 
 echo "------------------ Creating WordPress Database ------------------"
-mysql_password=QpWo#2LuQ
+mysql_password='QpWo#2LuQ'
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $mysql_password"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $mysql_password"
 
