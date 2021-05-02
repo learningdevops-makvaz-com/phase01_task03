@@ -41,7 +41,7 @@ cp /vagrant/ssl-params.conf /etc/nginx/snippets/
 echo "------------------ Creating WordPress Nginx Directory ------------------"
 WP_DIR=/var/www/wordpress
 if [ ! -d "$WP_DIR" ]; then
-    sudo mkdir /var/www/wordpress
+    sudo mkdir $WP_DIR
 fi
 
 echo "------------------ Copying Nginx Configuration ------------------"
@@ -61,17 +61,17 @@ sudo systemctl restart nginx
 
 echo "------------------ Downloading WordPress ------------------"
 cd /tmp
-FILE=wordpress-5.7.1.tar.gz
+WP_FILE=wordpress-5.7.1.tar.gz
 if [[ ! -f "$FILE" ]]; then
-    curl -LO https://wordpress.org/wordpress-5.7.1.tar.gz
+    curl -LO https://wordpress.org/$WP_FILE
 fi
 
 echo "------------------ Extracting WordPress ------------------"
-tar xzvf wordpress-5.7.1.tar.gz
-sudo cp -a /tmp/wordpress/. /var/www/wordpress
+tar xzvf $WP_FILE
+sudo cp -a /tmp/wordpress/. $WP_DIR
 
 echo "------------------ Setting Up Privileges ------------------"
-sudo chown -R www-data:www-data /var/www/wordpress/
+sudo chown -R www-data:www-data $WP_DIR
 
 echo "------------------ Copying WordPress PHP Configuration ------------------"
 cp /vagrant/wp-config.php /var/www/wordpress/wp-config.php
