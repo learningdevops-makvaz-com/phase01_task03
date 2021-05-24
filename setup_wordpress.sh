@@ -76,9 +76,10 @@ sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
 sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
 sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
 
-#gotta be in the wordpress folder under /var/www/wordpress
+# gotta be in the wordpress folder under /var/www/wordpress
+cd /var/www/wordpress
 sudo chmod +x wp-cli.phar
-sudo mv wp-cli.phar /usr/local.bin.wp
+sudo mv wp-cli.phar /usr/local/bin/wp
 wp core install --url="10.0.2.15"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Dbpass" --admin_email="test@test.nl"
 sudo wp --allow-root theme install twentyten
 wp theme activate twentyten
