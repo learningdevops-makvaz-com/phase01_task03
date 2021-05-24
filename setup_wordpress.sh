@@ -21,6 +21,7 @@ sudo apt-get upgrade -y
 sudo apt install nginx -y
 sudo apt install mysql-server -y 
 sudo apt install php7.4 php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-intl php7.4-mbstring php7.4-soap php7.4-xml php7.4-xmlrpc php7.4-zip -y
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 #configure firewall nginx
 sudo ufw enable
@@ -76,7 +77,6 @@ sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
 sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
 
 #gotta be in the wordpress folder under /var/www/wordpress
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local.bin.wp
 wp core install --url="10.0.2.15"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Dbpass" --admin_email="test@test.nl"
