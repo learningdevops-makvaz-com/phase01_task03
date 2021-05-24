@@ -34,13 +34,20 @@ sudo mysql -e "FLUSH PRIVILEGES;"
 
 # Configure nginx to use the PHP Processor
 # Cybergamerz can be changed to any domain name you want
-sudo mkdir /var/www/cybergamerz
-sudo chown -R $USER:$USER /var/www/cybergamerz
-cat << EOF > /etc/nginx/sites-available/cybergamerz
+
+cd /tmp
+sudo wget -LO https://wordpress.org/latest.tar.gz
+tar xzvf latest.tar.gz
+cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
+sudo cp -a /tmp/wordpress/. /var/www/wordpress
+sudo chown -R www-data:www-data /var/www/wordpress
+
+cat << EOF > /etc/nginx/sites-available/wordpress
 server {
 	listen 80;
-	server_name 10.0.2.15 cybergamerz www.cybergamerz;
-	root /var/www/cybergamerz;
+	server_name 10.0.2.15;
+
+	root /var/www/wordpress;
 
 	index index.html index.htm index.php;
 
@@ -51,25 +58,26 @@ server {
 
 	location ~ \.php$ {
 		include snippets/fastcgi-php.conf;
-		fastcgi_pass unix:/var/run/php/php-7.4-fpm.sock;
+		fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
 	}
 
-	location ~ /|.ht {
+	location ~ /\.ht {
 		deny all;
 	}
 }
 EOF
-sudo ln -s /etc/nginx/sites-available/cybergamerz /etc/nginx/sites-enabled/
+
+sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 
-cd /tmp
-sudo wget -LO https://wordpress.org/latest.tar.gz
-tar xzvf latest.tar.gz
-cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
-sudo cp -a /tmp/wordpress/. /var/www/wordpress
-sudo chown -R www-data:www-data /var/www/wordpress
+cd /var/www/wordpress
+
 sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
 sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
-sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php   
+sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
+
+sudo systemctl restart nginx
+sudo systemctl restart mysql
+
 
 
