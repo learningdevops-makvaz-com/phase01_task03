@@ -5,9 +5,9 @@ echo 'This script should install and setup Wordpress'
 
 # Variables needed for configurations
 
-Dbname ='wordpress'
-Dbuser ='wpuser'
-Dbpass ='Techgrounds101'
+Dbname=wordpress
+Dbuser=wpuser
+Dbpass=Techgrounds101
 
 ###############
 # nginx, mysql, WordPress.
@@ -20,7 +20,7 @@ sudo apt update
 sudo apt-get upgrade -y
 sudo apt install nginx -y
 sudo apt install mysql-server -y 
-sudo apt install php7.4 php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-intl php7.4-mbstring php7.4-soap php7.4-xml php7.4-xmlrpc php7.4-zip 0 -y
+sudo apt install php7.4 php7.4-fpm php7.4-mysql php7.4-curl php7.4-gd php7.4-intl php7.4-mbstring php7.4-soap php7.4-xml php7.4-xmlrpc php7.4-zip -y
 
 #configure firewall nginx
 sudo ufw enable
@@ -36,9 +36,9 @@ sudo mysql -e "FLUSH PRIVILEGES;"
 # Cybergamerz can be changed to any domain name you want
 
 cd /tmp
-sudo wget -LO https://wordpress.org/latest.tar.gz
+sudo wget https://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
-cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
+sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
 sudo cp -a /tmp/wordpress/. /var/www/wordpress
 sudo chown -R www-data:www-data /var/www/wordpress
 
