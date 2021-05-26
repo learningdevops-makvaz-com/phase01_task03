@@ -8,12 +8,15 @@ echo 'This script should install and setup Wordpress'
 Dbname=wordpress
 Dbuser=wpuser
 Dbpass=Techgrounds101
+username=Teerminuz
 
 ###############
 # nginx, mysql, WordPress.
 # WordPress should have already configured with theme twentynineteen and with created user admin with password !2three456..
 #####################
 
+sudo adduser $username
+echo "$Dbpass" | passwd "$username" --stdin
 
 # install the needed packages
 sudo apt update
@@ -70,11 +73,12 @@ EOF
 sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 
-cd /var/www/wordpress
 
 sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
 sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
 sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
+
+sudo systemctl restart nginx
 
 # gotta be in the wordpress folder under /var/www/wordpress
 
@@ -86,8 +90,7 @@ wp core install -- allow-root --url="10.0.2.15"  --title="Cybergamerz" --admin_u
 wp --allow-root theme install twentyten
 wp theme activate twentyten
 
-sudo systemctl restart nginx
-sudo systemctl restart mysql
+
 
 
 
