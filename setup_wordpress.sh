@@ -77,8 +77,8 @@ sudo unlink /etc/nginx/sites-enabled/default
 
 cd /home/www/wordpress/
 sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
-sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.phpwp-config.php
-sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.phpwp-config.php
+sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
+sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
 
 sudo systemctl restart nginx
 
