@@ -8,13 +8,16 @@ echo 'This script should install and setup Wordpress'
 Dbname=wordpress
 Dbuser=wpuser
 Dbpass=Techgrounds101
-username=Teerminuz
+username=teerminuz
 
 ###############
 # nginx, mysql, WordPress.
 # WordPress should have already configured with theme twentynineteen and with created user admin with password !2three456..
 #####################
 
+#create user for wordpress installation
+adduser --gecos "" --disabled-password $username
+chpasswd <<<"$username:$Dbpass"
 
 # install the needed packages
 sudo apt update
@@ -73,9 +76,9 @@ sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 
 
-sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
-sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
-sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
+sudo sed -i "s/'database_name_here'/'$Dbname'/g" /home/www/wordpress/wp-config.php
+sudo sed -i "s/'username_here'/'$Dbuser'/g" /home/www/wordpress/wp-config.phpwp-config.php
+sudo sed -i "s/'password_here'/'$Dbpass'/g" /home/www/wordpress/wp-config.phpwp-config.php
 
 sudo systemctl restart nginx
 
@@ -85,6 +88,8 @@ wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 cd /home/www/wordpress/
+su teerminuz
+echo "$Dbpass"
 wp core install --url="10.0.2.15"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Dbpass" --admin_email="test@test.nl"
 wp theme install twentyten
 wp theme activate twentyten
