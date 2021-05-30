@@ -4,10 +4,10 @@ echo 'This script should install and setup Wordpress'
 
 
 # Variables needed for configurations these can be edited to anything you want
-Dbname=wordpress
-Dbuser=wpuser
-Dbpass=Devops101
-Wppass=!2three456.
+Dbname="wordpress"
+Dbuser="wpuser"
+Dbpass="Devops101"
+Wppass="!2three456."
 
 ###############
 # nginx, mysql, WordPress.
