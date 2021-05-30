@@ -41,16 +41,16 @@ cd /tmp
 sudo wget https://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
-sudo mkdir /home/wordpress/www/
-sudo cp -a /tmp/wordpress/. /home/wordpress/www
-sudo chown -R www-data:www-data /home/wordpress/www
+sudo mkdir /home/www/wordpress/
+sudo cp -a /tmp/wordpress/. /home/www/wordpress/
+sudo chown -R www-data:www-data /home/www/wordpress/
 
 cat << EOF > /etc/nginx/sites-available/wordpress
 server {
 	listen 80;
 	server_name 10.0.2.15;
 
-	root /home/www/wordpress;
+	root /home/www/wordpress/;
 
 	index index.html index.htm index.php;
 
@@ -84,7 +84,7 @@ sudo systemctl restart nginx
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
-cd /home/wordpress/www
+cd /home/www/wordpress/
 wp core install --url="10.0.2.15"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Dbpass" --admin_email="test@test.nl"
 wp theme install twentyten
 wp theme activate twentyten
