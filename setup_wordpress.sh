@@ -87,8 +87,8 @@ sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 cd /home/www/wordpress/
 sudo -u www-data -- wp core install --url="192.168.50.2"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Wppass" --admin_email="test@test.nl"
-sudo -u www-data -- wp theme install twentyten
-sudo -u www-data -- wp theme activate twentyten
+sudo -u www-data -- wp theme install twentynineteen
+sudo -u www-data -- wp theme activate twentynineteen
 
 
 
