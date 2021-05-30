@@ -75,10 +75,10 @@ EOF
 sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 
-
-sudo sed -i "s/'database_name_here'/'$Dbname'/g" /home/www/wordpress/wp-config.php
-sudo sed -i "s/'username_here'/'$Dbuser'/g" /home/www/wordpress/wp-config.phpwp-config.php
-sudo sed -i "s/'password_here'/'$Dbpass'/g" /home/www/wordpress/wp-config.phpwp-config.php
+cd /home/www/wordpress/
+sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
+sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.phpwp-config.php
+sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.phpwp-config.php
 
 sudo systemctl restart nginx
 
