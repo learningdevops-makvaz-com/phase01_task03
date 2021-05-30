@@ -3,23 +3,18 @@
 echo 'This script should install and setup Wordpress'
 
 
-# Variables needed for configurations
-
+# Variables needed for configurations these can be edited to anything you want
 Dbname=wordpress
 Dbuser=wpuser
-Dbpass=Techgrounds101
-#username=teerminuz
+Dbpass=Devops101
+Wppass=!2three456.
 
 ###############
 # nginx, mysql, WordPress.
 # WordPress should have already configured with theme twentynineteen and with created user admin with password !2three456..
 #####################
 
-#create user for wordpress installation
-#dduser --gecos "" --disabled-password $username
-#chpasswd <<<"$username:$Dbpass"
-
-# install the needed packages
+# install packages
 sudo apt update
 sudo apt-get upgrade -y
 sudo apt install nginx -y
@@ -37,9 +32,7 @@ sudo mysql -e "CREATE USER '$Dbuser'@'localhost' IDENTIFIED BY '$Dbpass';"
 sudo mysql -e "GRANT ALL ON $Dbname.* TO '$Dbuser'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
 
-# Configure nginx to use the PHP Processor
-# Cybergamerz can be changed to any domain name you want
-
+# Permissions configurations for wordpress
 cd /tmp
 sudo wget https://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
@@ -50,6 +43,7 @@ sudo chown -R www-data:www-data /home/www/wordpress/
 sudo find /home/www/wordpress/ -type f -exec chmod 775 {} \;
 sudo find /home/www/wordpress/ -type f -exec chmod 644 {} \;
 
+# Create wordpress Virtual Host
 cat << EOF > /etc/nginx/sites-available/wordpress
 server {
 	listen 80;
@@ -74,9 +68,11 @@ server {
 }
 EOF
 
+# Unlink default nginx vhost to wordpress vhost
 sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
 sudo unlink /etc/nginx/sites-enabled/default
 
+# Edit the wordpress config file
 cd /home/www/wordpress/
 sudo sed -i "s/'database_name_here'/'$Dbname'/g" wp-config.php
 sudo sed -i "s/'username_here'/'$Dbuser'/g" wp-config.php
@@ -84,13 +80,13 @@ sudo sed -i "s/'password_here'/'$Dbpass'/g" wp-config.php
 
 sudo systemctl restart nginx
 
-# gotta be in the wordpress folder under /var/www/wordpress
 
+#install and configure WP-CLI
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
-cd /home/www/wordpress/q
-sudo -u www-data -- wp core install --url="10.0.2.15"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Dbpass" --admin_email="test@test.nl"
+cd /home/www/wordpress/
+sudo -u www-data -- wp core install --url="192.168.50.2"  --title="Cybergamerz" --admin_user="admin" --admin_password="$Wppass" --admin_email="test@test.nl"
 sudo -u www-data -- wp theme install twentyten
 sudo -u www-data -- wp theme activate twentyten
 
