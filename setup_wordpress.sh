@@ -47,6 +47,8 @@ sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
 sudo mkdir -p /home/www/wordpress/
 sudo cp -a /tmp/wordpress/. /home/www/wordpress/
 sudo chown -R www-data:www-data /home/www/wordpress/
+sudo find /home/www/wordpress/ -type f -exec chmod 644 {} \;
+sudo find /home/www/wordpress/ -type f -exec chmod 644 {} \;
 
 cat << EOF > /etc/nginx/sites-available/wordpress
 server {
