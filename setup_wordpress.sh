@@ -7,7 +7,7 @@ DBUsername='wordpress_user'
 DBPassword='myverycoolwordpresspassword'
 WordpressUser='admin'
 WordpressPassword='!2three456' 
-Path='/var/www/html/wordpress/mysite'
+path='/var/www/html/wordpress/mysite'
 sudo apt update
 
 # Install Assets
@@ -72,6 +72,7 @@ server {
 EOF
 
 sudo ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled
+sudo unlink /etc/nginx/sites-enabled/default
 
 # Download & Configure WordPress
 
@@ -97,7 +98,7 @@ sudo sed -i "s/'password_here'/'$DBPassword'/g" wp-config.php
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
-wp core install --url=10.0.2.15 --title=Wordpresstest --admin_user=admin --admin_email=admin@admin.admin --admin_password=\!2three456 --path=$path --allow-root
+wp core install --url=192.168.56.2 --title=Wordpresstest --admin_user=admin --admin_email=admin@admin.admin --admin_password=\!2three456 --path=$path --allow-root
 wp theme install twentynineteen --path=$path --activate --allow-root
 
 
