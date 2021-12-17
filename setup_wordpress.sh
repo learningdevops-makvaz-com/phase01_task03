@@ -8,9 +8,7 @@ echo 'This script should install and setup Wordpress'
 #Install nginx, mysql and php packages
 sudo apt update
 sudo apt upgrade -y
-sudo apt install nginx -y
-sudo apt install mysql-server -y
-sudo apt install php7.4-cli php7.4-fpm php7.4-mysql php7.4-json php7.4-opcache php7.4-mbstring php7.4-xml php7.4-gd php7.4-curl -y
+sudo apt install nginx mysql-server php7.4-cli php7.4-fpm php7.4-mysql php7.4-json php7.4-opcache php7.4-mbstring php7.4-xml php7.4-gd php7.4-curl -y
 
 #Firewall
 sudo ufw enable
