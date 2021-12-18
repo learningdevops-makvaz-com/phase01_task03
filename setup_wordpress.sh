@@ -17,9 +17,11 @@ echo '---------- Install MYSQL Packages ----------'
 sudo apt-get install mysql-server -y
 
 echo '---------- Create WordPress Database & User ----------'
+#debconf-set-selections lets you install mysql unattended, mysql asks for password, and we set the password
 mysql_pw='YourPassword123!'
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password ${mysql_pw}"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${mysql_pw}"
+#then we create the database from wpDB.sql file
 sudo mysql -u root -p$mysql_pw < /vagrant/wpDB.sql
 
 echo '---------- Install PHP Packages ----------'
@@ -59,6 +61,7 @@ sudo chown -R www-data:www-data ${WP_directory}
 sudo cp /vagrant/wp-config.php /var/www/wordpress/wp-config.php
 
 echo "------------------  WordPress CLI Installation ------------------"
+#curl -O, command that lets you download a file and flag -O saves the file with the original name
 sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 sudo chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
