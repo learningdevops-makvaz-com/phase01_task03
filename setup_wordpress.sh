@@ -24,7 +24,7 @@ echo 'mysql done'
 
 #Wordpress install and permissions
 cd /tmp
-sudo wget https://wordpress.org/latest.tar.gz
+wget https://wordpress.org/latest.tar.gz
 tar -xvf latest.tar.gz
 
 echo 'wordpress phase 01 completed'
