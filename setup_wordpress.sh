@@ -15,21 +15,29 @@ sudo ufw enable
 sudo ufw allow 'Nginx Full'
 
 #Create database
-sudo mysql -e "CREATE DATABASE wpDB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
-sudo mysql -e "CREATE USER 'berna'@'localhost' IDENTIFIED BY 'Berna123';"
+sudo mysql -e "CREATE DATABASE IF NOT EXISTS wpDB DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;"
+sudo mysql -e "CREATE USER IF NOT EXISTS 'berna'@'localhost' IDENTIFIED BY 'Berna123';"
 sudo mysql -e "GRANT ALL ON wpDB.* TO 'berna'@'localhost';"
 sudo mysql -e "FLUSH PRIVILEGES;"
+
+echo 'mysql done'
 
 #Wordpress install and permissions
 cd /tmp
 sudo wget https://wordpress.org/latest.tar.gz
-tar xvf latest.tar.gz
+tar -xvf latest.tar.gz
+
+echo 'wordpress phase 01 completed'
+
 sudo cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
-sudo mkdir /var/www/html/mywordpress
+sudo mkdir -p /var/www/html/mywordpress
+echo 'wordpress phase 02 completed'
 sudo mv /tmp/wordpress/* /var/www/html/mywordpress
 sudo chown -R www-data:www-data /var/www/html/mywordpress
 sudo find /var/www/html/mywordpress -type f -exec chmod 775 {} \;
 sudo find /var/www/html/mywordpress -type f -exec chmod 644 {} \;
+
+
 
 #Create Wordpress server block
 sudo -s
@@ -81,4 +89,4 @@ wp theme install twentynineteen --path=$path --activate --allow-root
 sudo systemctl restart nginx
 sudo systemctl restart mysql 
 
-sudo apt-get install w3m
+sudo apt-get install w3m -y
