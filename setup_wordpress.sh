@@ -46,7 +46,6 @@ fi
 echo "------------------ Nginx WordpressSite File Configuration && Symbolic link ------------------"
 sudo cp /vagrant/WPNginxConfig.conf /etc/nginx/sites-available/wordpress
 sudo ln -sf /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/
-sudo unlink /etc/nginx/sites-enabled/default
 sudo nginx -t
 sudo systemctl restart nginx
 
@@ -59,6 +58,7 @@ echo "------------------ WordPress Privileges Setup && Wordpress PHP Configurati
 sudo cp -a /tmp/wordpress/* ${WP_directory}
 sudo chown -R www-data:www-data ${WP_directory}
 sudo cp /vagrant/wp-config.php ${WP_directory}/wp-config.php
+sudo chmod -R 777 ${WP_directory}/wp-content
 
 echo "------------------  WordPress CLI Installation ------------------"
 #curl -O, command that lets you download a file and flag -O saves the file with the original name
@@ -68,6 +68,7 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 
 echo "------------------  WordPress User && Wordpress Theme ------------------"
 cd ${WP_directory}
-wp core install --url="192.168.50.2" --title="WordPress Setup" --admin_user=admin --admin_email=admin123@admin.com --admin_password="!2three456." --allow-root
+wp core install --url="192.168.50.2" --title="WordPress Setup" --admin_user=admin --admin_email=admin123@admin.com --admin_password=!2three456. --allow-root
 wp theme install "twentynineteen" --activate --allow-root
+sudo systemctl restart nginx
 
